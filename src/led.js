@@ -1,6 +1,26 @@
 import cv from "./opencv.js"
+import { sleep } from "./utils.js"
 
-function isGlowing(src, hue = 0) {
+const hue = 0
+const q = 'video'
+const fps = 1
+
+let handler = console.log
+
+cv.onRuntimeInitialized = async () => {
+  let elem
+  while(!(elem = document.querySelector(q))) await sleep(100)
+  while(!(elem.width && elem.height)) await sleep(10)
+  const cap = new cv.VideoCapture(elem)
+  const src = new cv.Mat(elem.height, elem.width, cv.CV_8UC4)
+  while(true) {
+    cap.read(src)
+    handler(isGlowing(src))
+    await sleep(1000 / fps)
+  }
+}
+
+function isGlowing(src) {
   // HSV
   const img = new cv.Mat()
   cv.cvtColor(src, img, cv.COLOR_RGB2HSV)
@@ -18,9 +38,9 @@ function isGlowing(src, hue = 0) {
   cv.threshold(blur, denoise, 100, 255, cv.THRESH_BINARY)
 
   // result
-  res = // denoise to bool
+  res = !!cv.countNonZero(denoise)
+  // cv.imshow('canv', denoise)
 
-  src.delete()
   img.delete()
   gray.delete()
   low.delete()
@@ -29,7 +49,4 @@ function isGlowing(src, hue = 0) {
   denoise.delete()
 
   return res
-}
-
-cv.onRuntimeInitialized = () => {
 }
