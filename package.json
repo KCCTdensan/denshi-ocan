@@ -12,7 +12,7 @@
   "scripts": {
     "build": "run-s build:pub build:js",
     "build:js": "mkdir -p dist/js && run-p 'js:*'",
-    "build:pub": "rm -rf dist && cp -r pub dist",
+    "build:pub": "rm -rf dist && cp -r pub dist && rm -f dist/**/.gitignore",
     "js:ar": "esbuild --bundle src/ar.js --outdir=dist/js --minify",
     "js:led": "esbuild --bundle src/led.js --outdir=dist/js --minify --platform=node"
   }
