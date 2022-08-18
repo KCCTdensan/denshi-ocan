@@ -4,15 +4,15 @@ const sleep = ms => new Promise(res => setTimeout(res, ms))
 
 ////////////////////////////////////////////////////////////////
 
-const hue   = 0,
-      satur = 0,
-      saturMax = 255,
-      value = 225,
-      valueMax = 255
-const blur = 5
+const hue       = 0,
+      satur     = 0,
+      saturMax  = 255,
+      value     = 200,
+      valueMax  = 255
+const blurRatio = 0.2
 const threshold = 100
 
-const expandRatioX = 1.25,
+const expandRatioX = 1.2,
       expandRatioY = 2.5
 
 const posCache = 5
@@ -24,7 +24,6 @@ const fps = 1
 window.handler ||= console.log
 
 cv.onRuntimeInitialized = async () => {
-  isGlowing(cv.imread('src'));return
   let elem
   while(!(elem = document.querySelector(q))) await sleep(100)
   while(!(elem.width && elem.height)) await sleep(10)
@@ -74,38 +73,33 @@ function isGlowing(src) {
     } else if(!_posCacheN--) {
       return false
     }
-    const qr = src.roi(expand(wrapRect(_posCache), expandRatioX, expandRatioY))
+    const rect = wrapRect(_posCache) // used in blur ratio
+    const qr = src.roi(expand(rect, expandRatioX, expandRatioY))
 
     // HSV
     const img = new cv.Mat()
-  console.log(expand(wrapRect(_posCache), expandRatioX, expandRatioY))
     cv.cvtColor(qr, img, cv.COLOR_RGB2HSV)
-  console.log("asdf")
 
     // color mask range
     const gray = new cv.Mat()
     const low = cv.matFromArray(3, 1, cv.CV_64F, [hue, satur, value])
-    const high = cv.matFromArray(3, 1, cv.CV_64F, [hue, saturMax, valueMax])
+    const high = cv.matFromArray(3, 1, cv.CV_64F, [hue+4, saturMax, valueMax])
     cv.inRange(img, low, high, gray)
 
     // blur and threshold
     const denoise = new cv.Mat()
     const blurred = new cv.Mat()
+    const blur = rect.x * blurRatio
     cv.blur(gray, blurred, new cv.Size(blur, blur))
     cv.threshold(blurred, denoise, threshold, 255, cv.THRESH_BINARY)
 
     // result
     res = !!cv.countNonZero(denoise)
 
-    { cv.imshow('canv', qr)                   //
-      cv.imshow('canv2', gray)                //
-      cv.imshow('canv3', denoise)             //
-      console.log(cv.countNonZero(denoise))}  //
-
     detector.delete()
     detected.delete()
-    img.delete()
     qr.delete()
+    img.delete()
     gray.delete()
     low.delete()
     high.delete()
