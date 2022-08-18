@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="js">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="js/ar.js"></script>
+  <script src="js/led.js" async></script>
+</head>
+<body>
+  <a-scene
+    mindar-image="imageTargetSrc: assets/targets.mind"
+    color-space="sRGB"
+    renderer="colorManagement: true, physicallyCorrectLights: true"
+    vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false"
+  >
+    <a-assets>
+      <img id="card" src="assets/card.png" />
+      <a-asset-item id="dencon" src="assets/dencon.glb"></a-asset-item>
+    </a-assets>
+
+    <a-camera
+      position="0 0 0"
+      look-controls="enabled: false"
+    ></a-camera>
+
+    <a-entity mindar-image-target="targetIndex: 0">
+      <a-plane
+        src="#card"
+        position="0 0 0"
+        height="0.552"
+        width="1"
+        rotation="0 0 0"
+      ></a-plane>
+      <a-gltf-model
+        id="hoge"
+        rotation="90 0 0"
+        position="0 0 0.1"
+        scale="0.5 0.5 0.5"
+        src="#dencon"
+        animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
+        animation-mixer
+      >
+    </a-entity>
+  </a-scene>
+  <canvas id='canv'></canvas>
+  <script>
+    document.querySelector("#hoge").addEventListener("click", e => console.log("clicked!!", e))
+  </script>
+</body>
+</html>
