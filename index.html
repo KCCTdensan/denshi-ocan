@@ -7,8 +7,24 @@
   <script src="js/ar.js"></script>
   <script src="js/main.js" defer></script>
   <script src="js/led.js" defer></script>
+  <style>
+    .buttons {
+      margin: 0 0.5rem 0.5rem 0;
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      z-index: 1000;
+    }
+    .buttons button {
+      min-height: 2rem;
+    }
+  </style>
 </head>
 <body>
+  <nav class="buttons">
+    <button id="ledButton" >LED検出(<span id="ledText">無効</span>)</button>
+    <button><a href="about/">About</a></button>
+  </nav>
   <a-scene
     mindar-image="imageTargetSrc: assets/targets.mind"
     color-space="sRGB"
@@ -68,6 +84,7 @@
         visible="false"
       ></a-gltf-model>
       <a-plane
+        color="#ddd"
         rotation="-30 0 0"
         position="0 -1.5 0"
         width="2.5"
