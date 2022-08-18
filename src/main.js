@@ -184,14 +184,23 @@ target.addEventListener("targetFound", resumeAnime)
 
 target.addEventListener("targetLost", pauseAnime)
 
-// LED
+// LED関連
 
 window.handler = led => {
   // when growing, switch to ura
+  // very wip
 }
 
-sleep(10000).then(() => slotting(1))
-sleep(20000).then(() => slotting(0))
+// ナビゲーション操作
+
+q("#ledButton").addEventListener("click", () => {
+  const val = !window.ledEnable
+  if(val && !confirm(
+    "LED検出を有効化しようとしています\nこれにより動作が結構重くなります!\nよろしいですか？"
+  )) return
+  window.ledEnable = val
+  q("#ledText").innerText = val ? "有効" : "無効"
+})
 
 ////////////////////////////////////////////////////////////////
 
