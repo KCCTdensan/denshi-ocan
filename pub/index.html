@@ -16,8 +16,7 @@
     device-orientation-permission-ui="enabled: false"
   >
     <a-assets>
-      <img id="card" src="assets/card.png" />
-      <a-asset-item id="dencon" src="assets/dencon.glb"></a-asset-item>
+      <a-asset-item id="denconModel" src="assets/Denkon-kun.glb"></a-asset-item>
     </a-assets>
 
     <a-camera
@@ -26,23 +25,41 @@
     ></a-camera>
 
     <a-entity mindar-image-target="targetIndex: 0">
-      <a-plane
-        src="#card"
-        position="0 0 0"
-        height="0.552"
-        width="1"
-        rotation="0 0 0"
-      ></a-plane>
       <a-gltf-model
-        id="hoge"
-        rotation="90 0 0"
-        position="0 0 0.1"
-        scale="0.5 0.5 0.5"
-        src="#dencon"
-        animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
-        animation-mixer
+        id="dencon"
+        class="frontView"
+        rotation="0 0 0"
+        position="0 0 0"
+        scale="0.6 0.6 0.6"
+        src="#denconModel"
+        animation__rot="property: rotation; to: 0 360 0; dur: 4000; easing: linear; loop: true"
+      ></a-gltf-model>
+      <a-plane
+        rotation="-30 0 0"
+        position="0 -1.5 0"
+        width="2.5"
+        height="2"
       >
+        <a-text
+          position="0 0 0.1"
+          value="hello!"
+          color="black"
+        ></a-text>
+      </a-plane>
     </a-entity>
   </a-scene>
+  <script>
+    const sin = Math.sin
+
+    let front
+    function getFront() { front = document.querySelector('.frontView') }
+    function render(t) {
+      front.setAttribute("position", `0 ${(sin(t/200)+1)/4} 0`)
+      requestAnimationFrame(render)
+    }
+
+    getFront()
+    render()
+  </script>
 </body>
 </html>
