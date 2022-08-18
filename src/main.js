@@ -45,6 +45,8 @@ async function slotting(n) {
   || n >= entity.length) return
   pauseAnime()
   switching = true
+  entity[slot].classList.remove("clickable")
+  entity[n].classList.remove("clickable")
   if(n < slot) {
     // switch left to right
     entity[n].setAttribute("position", "-5 0 0")
@@ -71,6 +73,8 @@ async function slotting(n) {
     entity[n].setAttribute("position", "0 0 0")
   }
   await sleep(100)
+  entity[slot].classList.add("clickable")
+  entity[n].classList.add("clickable")
   slot = n
   switching = false
   resumeAnime()
@@ -144,9 +148,11 @@ function stopDance() {
     // now dancing!
     case 2: dancing = 0
       entityAnime[slot].removeEventListener("animation-finished", onDanceEnd)
+      entityAnime[slot].classList.remove("clickable")
       entityAnime[slot].setAttribute("visible", "false")
       entityAnime[slot].removeAttribute("animation-mixer")
       entity[slot].setAttribute("visible", "true")
+      entity[slot].classList.add("clickable")
       break
     // dance ended
     case 3: dancing = 0; break
@@ -159,9 +165,11 @@ entity.forEach((e, i) =>
       await lookback()
       await sleep(250)
       if(!dancing) return; dancing = 2
+      entity[i].classList.remove("clickable")
       entity[i].setAttribute("visible", "false")
       entity[i].setAttribute("position", "0 0 0")
       entityAnime[i].setAttribute("visible", "true")
+      entityAnime[i].classList.add("clickable")
       entityAnime[i].setAttribute("animation-mixer", "loop: once")
       entityAnime[i].addEventListener("animation-finished", onDanceEnd)
     }
@@ -170,9 +178,11 @@ entity.forEach((e, i) =>
 async function onDanceEnd() {
   if(!dancing) return; dancing = 3
   entityAnime[slot].removeEventListener("animation-finished", onDanceEnd)
+      entityAnime[slot].classList.remove("clickable")
   entityAnime[slot].setAttribute("visible", "false")
   entityAnime[slot].removeAttribute("animation-mixer")
   entity[slot].setAttribute("visible", "true")
+      entity[slot].classList.add("clickable")
   await sleep(500)
   if(!dancing) return; dancing = 0
   resumeAnime()

@@ -31,17 +31,17 @@
     <button><a href="about/">About</a></button>
   </nav>
   <a-scene
-    mindar-image="imageTargetSrc: assets/targets.mind"
+    mindar-image="imageTargetSrc: assets/ar/targets.mind"
     color-space="sRGB"
     renderer="colorManagement: true, physicallyCorrectLights: true"
     vr-mode-ui="enabled: false"
     device-orientation-permission-ui="enabled: false"
   >
     <a-assets>
-      <a-asset-item id="denconModel" src="assets/Denkon-kun.glb"></a-asset-item>
-      <a-asset-item id="denconModelRed" src="assets/Denkon-kunred.glb"></a-asset-item>
-      <a-asset-item id="denconModelAnime" src="assets/Denkon-kunAnime.glb"></a-asset-item>
-      <a-asset-item id="denconModelAnime2" src="assets/Denkon-kunAnime2.glb"></a-asset-item>
+      <a-asset-item id="denconModel" src="assets/model/Denkon-kun.glb"></a-asset-item>
+      <a-asset-item id="denconModelRed" src="assets/model/Denkon-kunred.glb"></a-asset-item>
+      <a-asset-item id="denconModelAnime" src="assets/model/Denkon-kunAnime.glb"></a-asset-item>
+      <a-asset-item id="denconModelAnime2" src="assets/model/Denkon-kunAnime2.glb"></a-asset-item>
     </a-assets>
 
     <a-camera
@@ -63,7 +63,6 @@
       ></a-gltf-model>
       <a-gltf-model
         id="denconRed"
-        class="clickable"
         rotation="0 0 0"
         position="0 0 0"
         scale="0.5 0.5 0.5"
@@ -72,7 +71,6 @@
       ></a-gltf-model>
       <a-gltf-model
         id="denconAnime"
-        class="clickable"
         rotation="0 0 0"
         position="0 0 0"
         scale="0.5 0.5 0.5"
@@ -81,7 +79,6 @@
       ></a-gltf-model>
       <a-gltf-model
         id="denconAnime2"
-        class="clickable"
         rotation="0 0 0"
         position="0 0 0"
         scale="0.5 0.5 0.5"
@@ -92,12 +89,16 @@
         color="#ddd"
         rotation="-30 0 0"
         position="0 -1.5 0"
-        width="2.5"
-        height="2"
+        width="2"
+        height="0.8"
       >
         <a-text
-          position="0 0 0.1"
-          value="hello!"
+          position="-0.8 0 0.1"
+          value="QRコードからこんにちは!
+                 電コンです!また会ったね!"
+          font="assets/font/Mplus2-Bold-msdf.json"
+          font-image="assets/font/Mplus2-Bold.png"
+          negate="false"
           color="black"
         ></a-text>
       </a-plane>
