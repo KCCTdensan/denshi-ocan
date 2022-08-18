@@ -14,6 +14,9 @@ const animationRotL     = "property: rotation; to: 0 360 0; dur: 4000; easing: l
       animationSwitchToL      = "property: position; to: -5 0 0; dur: 1000; easing: easeOutQuad",
       animationSwitchFromR    = "property: position; to: 0 0 0; dur: 1000; easing: easeOutQuad",
       animationSwitchFromL    = "property: position; to: 0 0 0; dur: 1000; easing: easeOutQuad"
+const navButtonL  = q("#buttonL"),
+      navButtonR  = q("#buttonR"),
+      ledButton   = q("#ledButton")
 
 ////////////////////////////////////////////////////////////////
 
@@ -188,10 +191,9 @@ async function onDanceEnd() {
   resumeAnime()
 }
 
-// event
+// AR関連のevent
 
 target.addEventListener("targetFound", resumeAnime)
-
 target.addEventListener("targetLost", pauseAnime)
 
 // LED関連
@@ -203,7 +205,41 @@ window.handler = led => {
 
 // ナビゲーション操作
 
-q("#ledButton").addEventListener("click", () => {
+navButtonL.addEventListener("click", async () => {
+  if(slot < 1) {
+    navButtonL.setAttribute("color", "#f00")
+    await sleep(1000)
+    navButtonL.setAttribute("color", "#888")
+  } else {
+    if(slot-1 == 0)
+      navButtonL.setAttribute("color", "#888")
+    navButtonR.setAttribute("color", "#ddd")
+    navButtonL.classList.remove("clickable")
+    navButtonR.classList.remove("clickable")
+    await slotting(slot-1)
+    navButtonL.classList.add("clickable")
+    navButtonR.classList.add("clickable")
+  }
+})
+
+navButtonR.addEventListener("click", async () => {
+  if(slot > entity.length-2) {
+    navButtonR.setAttribute("color", "#f00")
+    await sleep(1000)
+    navButtonR.setAttribute("color", "#888")
+  } else {
+    if(slot+1 == entity.length-1)
+      navButtonR.setAttribute("color", "#888")
+    navButtonL.setAttribute("color", "#ddd")
+    navButtonL.classList.remove("clickable")
+    navButtonR.classList.remove("clickable")
+    await slotting(slot+1)
+    navButtonL.classList.add("clickable")
+    navButtonR.classList.add("clickable")
+  }
+})
+
+ledButton.addEventListener("click", () => {
   const val = !window.ledEnable
   if(val && !confirm(
     "LED検出を有効化しようとしています\nこれにより動作が結構重くなります!\nよろしいですか？"
