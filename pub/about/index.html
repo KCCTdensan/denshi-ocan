@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About | OCAN2022 AR DEMO</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+</head>
+<body>
+  <section class="section is-medium">
+    <div class="container is-max-desktop">
+      <nav class="navbar">
+        <div class="navbar-brand">
+          <h1 class="navbar-item title">このデモについて</h1>
+        </div>
+        <div class="navbar-menu is-active is-shadowless">
+          <div class="navbar-end">
+            <div class="buttons">
+              <a id="tweet" class="button is-primary" href="https://twitter.com/share?url=https://ocan22.d3bu.net" data-show-content="false">Tweet</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <section class="section">
+        <div class="content">
+<h2>はじめに</h2>
+<p>
+このページに来てくれてありがとうございます！
+
+ここでは皆さんに体験していただく/いただいた電コンくんARがどうやって作られたのか，また制作秘話などを赤裸々に語っていく場所です．
+</p>
+<h2>ソースコード</h2>
+<p>
+今回体験していただいた「電コンくんAR」のソースコードは<a href="https://github.com/KCCTdensan/ocan2022-ar/tree/master/src/" target="_blank">ここ</a>からご覧いただけます．
+
+3Dモデルの描画には，名刺の追従に<a href="https://hiukim.github.io/mind-ar-js-doc/" target="_blank">MindAR</a>を，描画に<a href="https://aframe.io/" target="_blank">A-Frame</a>を使用しています．
+また，LEDの認識には画像認識ライブラリの<a href="https://opencv.org" target="_blank">OpenCV</a>を使用しています．
+</p>
+<h3>概要</h3>
+<p>
+このプログラムはQRコードとLEDを読み取って，そこで光っていることを検知すると電コンくん(3Dモデル)をHOGEHOGEHOGEHOGEHOGEHOGEHOGEHOGEするというプログラムです．
+</p>
+<h3>解説</h3>
+<p>
+ここからは専門用語も交えた少し難しい解説となります．
+
+UNDER CONSTRUCTION
+</p>
+<h2>制作者のお話</h2>
+<p>
+制作にあたって大変だったところや，楽しかったことなどをソフト開発者(3年生)と3Dモデル作成者(1年生)の2人に聞いてみました！
+今回はQ1~Q3を主力ソフト開発者の人に，Q4を3Dモデル作成者に答えてもらいました．
+</p>
+<h3>Q1 作るにあたって一番大変だったことは何ですか？</h3>
+<h3>A1 全部！！！</h3>
+<p>
+迫りくる納期に怯えながら開発するのは大変でした．
+</p>
+<h3>Q2 実装の時の思い出などはありますか？</h3>
+<h3>A2 情報の少なさに嘆いていました</h3>
+<p>
+この分野(AR)はまだ発展途上の分野だからか，分からないところがあっても中々情報が出てきませんでした．
+特に，LEDの画像認識にまつわる細かいところはあまりにも情報がなくて丸2日間ネットの海を彷徨いました．
+(それでも情報が出てこなかったので，最終的には自分でライブラリのソースコードを読んで理解しました．)
+しかし苦労して実装した部分が動いたときは，何にも代え難い達成感があり，充実した気分になりました！
+</p>
+<div>
+  <img src="dencon-debug.png" />
+  <small>デバッグ中の電コンくんAR</small>
+</div>
+</p>
+<h3>Q3 プログラミングを始めたのはいつからですか？</h3>
+<h3>A3 高専1年入ってから</h3>
+<p>
+元々，小学生のころに近所でやっていたロボット教室でプログラミングに触れたのですが，自宅に帰ってから環境構築ができず，ロボットやプログラミングからは一旦遠のいていました．
+しかし，高専に入学するタイミングで再びモチベーションが湧いたので，そのタイミングでプログラミングを始めました．
+</p>
+<h3>Q4 3Dモデルを作成するときの苦労はありましたか？</h3>
+<h3>A4 アニメーションの設定が大変でした(by3Dモデル制作者)</h3>
+<p>
+3Dモデルにアニメーションを付けるときには"骨"と呼ばれるものを付ける必要があるのですが，それを付けて動かしたときに，動かしたいところ以外も連動して動いてしまいがちで大変でした．
+あと，そもそもアニメーションを作るのが初めてで，自然な動きをつけられなかったことも挙げられます．
+</p>
+<div>
+  <img src="dencon-wip.png" />
+  <small>愛くるしい電コンくんの制作途中の様子</small>
+</div>
+
+<h2>最後に</h2>
+<p>
+結果，神戸高専の方向性は分かりませんでした．
+いかがでしたか？
+
+校則があまりなく先生との距離も近い神戸高専は，特に何かに拘束されることがないので，自由にモノづくりや学習ができる環境があります．
+電子工学科では，私たち学生が興味を持ったことを先生方に言うとバンバン協力してくれるので，学びたいことを深く学ぶことが出来ます．
+実際，電コンくんARの開発者がFPGAというデバイスに興味を持った時に先生に協力して頂いたことがあったり，今回の開発では先生の研究室に行ってたくさんの助言を頂いただいたりなど，様々な手助けをしていただきました．
+ほかにもLinuxの操作やプログラミングの基礎など，開発に必要な知識も学科で学ぶことが出来ます．
+
+このオープンキャンパスで「これ楽しい!こんなことやってみたいな!」と思った方はぜひ電子工学科に来てください！
+<strong>製作者一同みなさんをお待ちしております!</strong>
+</p>
+        </div>
+      </section>
+    </div>
+  </section>
+  <footer class="footer">
+    <div class="content has-text-centered mt-auto">
+      <p>&copy; 2022 KCCTdensan</p>
+    </div>
+  </footer>
+</body>
+</html>
