@@ -6,7 +6,7 @@ const q = query => document.querySelector(query)
 const target      = q("#target"),
       entity      = [q("#dencon"), q("#denconRed")],
       entityUra   = [q("#denconRed"), q("#dencon")],
-      entityAnime = [q("#denconAnime")]
+      entityAnime = [q("#denconAnime"), q("#denconAnime2")]
 const animationRotL     = "property: rotation; to: 0 360 0; dur: 4000; easing: linear; loop: true",
       animationLookback = "property: rotation; to: 0 0 0; dur: 1000; easing: easeInOutQuad",
       animationCenter   = "property: position; to: 0 0 0; dur: 1000; easing: easeInOutQuad",
