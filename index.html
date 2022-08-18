@@ -87,13 +87,13 @@
       ></a-gltf-model>
       <a-plane
         color="#ddd"
-        rotation="-30 0 0"
-        position="0 -1.5 0"
+        rotation="-15 0 0"
+        position="0 -1 0"
         width="2"
         height="0.8"
       >
         <a-text
-          position="-0.8 0 0.1"
+          position="-0.8 0 0.01"
           value="QRコードからこんにちは!
                  電コンです!また会ったね!"
           font="assets/font/Mplus2-Bold-msdf.json"
@@ -101,6 +101,29 @@
           negate="false"
           color="black"
         ></a-text>
+        <a-plane
+          color="#444"
+          position="0 -0.7 0"
+          width="2"
+          height="0.4"
+        >
+          <a-triangle
+            id="buttonL"
+            class="clickable"
+            vertex-a="-0.4 0.15 0.01"
+            vertex-b="-0.7 0 0.01"
+            vertex-c="-0.4 -0.15 0.01"
+            color="#888"
+          ></a-triangle>
+          <a-triangle
+            id="buttonR"
+            class="clickable"
+            vertex-a="0.4 0.15 0.01"
+            vertex-b="0.4 -0.15 0.01"
+            vertex-c="0.7 0 0.01"
+            color="#ddd"
+          ></a-triangle>
+        </a-plane>
       </a-plane>
     </a-entity>
   </a-scene>
