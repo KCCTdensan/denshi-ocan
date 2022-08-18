@@ -4,15 +4,21 @@ const q = query => document.querySelector(query)
 ////////////////////////////////////////////////////////////////
 
 const target      = q("#target"),
-      entity      = [q("#dencon")],
+      entity      = [q("#dencon"), q("#denconRed")],
+      entityUra   = [q("#denconRed"), q("#dencon")],
       entityAnime = [q("#denconAnime")]
-const animationRotL     = "property: rotation; to: 0 360 0; dur: 4000; easing: linear; loop: true"
-      animationLookback = "property: rotation; to: 0 0 0; dur: 1000; easing: easeInOutQuad"
-      animationCenter   = "property: position; to: 0 0 0; dur: 1000; easing: easeInOutQuad"
+const animationRotL     = "property: rotation; to: 0 360 0; dur: 4000; easing: linear; loop: true",
+      animationLookback = "property: rotation; to: 0 0 0; dur: 1000; easing: easeInOutQuad",
+      animationCenter   = "property: position; to: 0 0 0; dur: 1000; easing: easeInOutQuad",
+      animationSwitchToR      = "property: position; to: 5 0 0; dur: 1000; easing: easeOutQuad",
+      animationSwitchToL      = "property: position; to: -5 0 0; dur: 1000; easing: easeOutQuad",
+      animationSwitchFromR    = "property: position; to: 0 0 0; dur: 1000; easing: easeOutQuad",
+      animationSwitchFromL    = "property: position; to: 0 0 0; dur: 1000; easing: easeOutQuad"
 
 ////////////////////////////////////////////////////////////////
 
 let slot = 0
+let switching = false
 let fuwafuwaLast = true
 let _fuwafuwa = true
 let animeLast = animationRotL
@@ -20,9 +26,53 @@ let dancing = 0 // 0 | 1 | 2 | 3
 
 ////////////////////////////////////////////////////////////////
 
-function slotting(n) {
+// switch entities
+
+const playAnime = (n, anime) => new Promise(res => {
+  entity[n].setAttribute("animation", anime)
+  entity[n].addEventListener("animationcomplete", animationEnd)
+
+  function animationEnd() {
+    entity[n].removeEventListener("animationcomplete", animationEnd)
+    res()
+  }
+})
+
+async function slotting(n) {
+  if(switching
+  || n == slot
+  || n < 0
+  || n >= entity.length) return
   pauseAnime()
+  switching = true
+  if(n < slot) {
+    // switch left to right
+    entity[n].setAttribute("position", "-5 0 0")
+    entity[n].setAttribute("visible", "true")
+    entity[slot].setAttribute("visible", "true")
+    await Promise.all([
+      playAnime(n, animationSwitchFromL),
+      playAnime(slot, animationSwitchToR),
+    ])
+    entity[slot].setAttribute("visible", "false")
+    entity[slot].removeAttribute("animation")
+    entity[n].setAttribute("position", "0 0 0")
+  } else {
+    // switch right to left
+    entity[n].setAttribute("position", "5 0 0")
+    entity[n].setAttribute("visible", "true")
+    entity[slot].setAttribute("visible", "true")
+    await Promise.all([
+      playAnime(n, animationSwitchFromR),
+      playAnime(slot, animationSwitchToL),
+    ])
+    entity[slot].setAttribute("visible", "false")
+    entity[slot].removeAttribute("animation")
+    entity[n].setAttribute("position", "0 0 0")
+  }
+  await sleep(100)
   slot = n
+  switching = false
   resumeAnime()
 }
 
@@ -48,6 +98,8 @@ function startFuwafuwa() {
 // animation utils
 
 function pauseAnime(ignoreDancing = false) {
+  // 切り替えの方が優先
+  if(switching) return
   // ダンスはポーズしない
   if(!ignoreDancing && dancing) {
     stopDance()
@@ -134,7 +186,12 @@ target.addEventListener("targetLost", pauseAnime)
 
 // LED
 
-window.handler = led => {}
+window.handler = led => {
+  // when growing, switch to ura
+}
+
+sleep(10000).then(() => slotting(1))
+sleep(20000).then(() => slotting(0))
 
 ////////////////////////////////////////////////////////////////
 

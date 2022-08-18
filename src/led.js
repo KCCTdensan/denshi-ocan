@@ -22,6 +22,7 @@ const fps = 1
 ////////////////////////////////////////////////////////////////
 
 window.handler ||= console.log
+window.ledEnable ||= false
 
 cv.onRuntimeInitialized = async () => {
   let elem
@@ -30,8 +31,10 @@ cv.onRuntimeInitialized = async () => {
   const cap = new cv.VideoCapture(elem)
   const src = new cv.Mat(elem.height, elem.width, cv.CV_8UC4)
   while(true) {
-    cap.read(src)
-    handler(isGlowing(src))
+    if(ledEnable) {
+      cap.read(src)
+      handler(isGlowing(src))
+    }
     await sleep(1000 / fps)
   }
 }

@@ -18,6 +18,7 @@
   >
     <a-assets>
       <a-asset-item id="denconModel" src="assets/Denkon-kun.glb"></a-asset-item>
+      <a-asset-item id="denconModelRed" src="assets/Denkon-kunred.glb"></a-asset-item>
       <a-asset-item id="denconModelAnime" src="assets/Denkon-kunAnime.glb"></a-asset-item>
     </a-assets>
 
@@ -37,6 +38,15 @@
         scale="0.5 0.5 0.5"
         src="#denconModel"
         visible="true"
+      ></a-gltf-model>
+      <a-gltf-model
+        id="denconRed"
+        class="clickable"
+        rotation="0 0 0"
+        position="0 0 0"
+        scale="0.5 0.5 0.5"
+        src="#denconModelRed"
+        visible="false"
       ></a-gltf-model>
       <a-gltf-model
         id="denconAnime"
