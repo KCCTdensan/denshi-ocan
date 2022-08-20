@@ -5,7 +5,7 @@
     "mind-ar": "1.1.5"
   },
   "devDependencies": {
-    "esbuild": "0.15.3",
+    "esbuild": "0.15.5",
     "npm-run-all": "4.1.5"
   },
   "private": true,
@@ -15,6 +15,6 @@
     "build:pub": "rm -rf dist && cp -r pub dist && rm -f dist/**/.gitignore",
     "js:ar": "esbuild --bundle src/ar.js --outdir=dist/js --minify",
     "js:led": "esbuild --bundle src/led.js --outdir=dist/js --minify --platform=node",
-    "js:main": "esbuild src/main.js --outdir=dist/js --minify"
+    "js:main": "esbuild --bundle src/main.js --outdir=dist/js --minify"
   }
 }
