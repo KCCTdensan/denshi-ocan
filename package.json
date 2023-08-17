@@ -10,7 +10,7 @@
   "packageManager": "pnpm@8.6.12",
   "private": true,
   "scripts": {
-    "build": "tsup --minify",
+    "build": "tsup --minify && cp -r root/* dist/",
     "dev": "tsup --watch"
   },
   "tsup": {
@@ -19,6 +19,7 @@
       "js/ar": "src/ar.js",
       "js/led": "src/led.js"
     },
+    "outDir": "dist/2023",
     "sourcemap": true,
     "splitting": false,
     "clean": true,
