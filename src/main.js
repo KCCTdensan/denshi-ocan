@@ -242,7 +242,7 @@ navButtonR.addEventListener("click", async () => {
 ledButton.addEventListener("click", () => {
   const val = !window.ledEnable
   if(val && !confirm(
-    "LED検出を有効化しようとしています\nこれにより動作が結構重くなります!\nよろしいですか？"
+    "LED検出を有効化しようとしています\nこれにより動作が結構重くなります!\nよろしいですか？\n注: この機能は未完成です"
   )) return
   window.ledEnable = val
   q("#ledText").innerText = val ? "有効" : "無効"
