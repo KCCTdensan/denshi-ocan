@@ -4,13 +4,14 @@
   "devDependencies": {
     "aframe": "1.4.2",
     "aframe-extras": "7.0.0",
-    "mind-ar": "1.2.3",
-    "tsup": "7.2.0"
+    "mind-ar": "1.2.5",
+    "tsup": "8.2.4",
+    "typescript": "5.5.4"
   },
-  "packageManager": "pnpm@8.6.12",
+  "packageManager": "pnpm@9.7.0",
   "private": true,
   "scripts": {
-    "build": "tsup --minify && cp -r root/* dist/",
+    "build": "tsup --minify -d dist/ar && cp -r root/* dist/",
     "dev": "tsup --watch"
   },
   "tsup": {
@@ -19,7 +20,6 @@
       "js/ar": "src/ar.js",
       "js/led": "src/led.js"
     },
-    "outDir": "dist/2023",
     "sourcemap": true,
     "splitting": false,
     "clean": true,
