@@ -2,6 +2,10 @@
 
 (´･_･`)
 
+## メンテナンスについて
+
+aframe・aframe-extrasを更新するときは覚悟が必要
+
 ## ターゲット
 
 https://hiukim.github.io/mind-ar-js-doc/tools/compile/ を使ってコンパイルしました。
